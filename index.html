@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>News App / Kelompok 1</title>
+</head>
+<body>
+    <main>
+        <header>
+            <a class="logo" href="/">Kelompok 1</a>
+            <form action="/" method="GET">
+                <input autofocus class="search-input" value="{{ .SearchKey }}" placeholder="Cari Topik Yuk..." type="search" name="q">
+            </form>
+        </header>
+
+        <section class="container">
+            <div class="result-count">
+                {{ if (gt .Results.TotalResults 0) }}
+                    <p>Terdapat <strong>{{ .Results.TotalResults }}</strong> Pencarian ketemu. kamu berada di halaman <strong>{{ .CurrentPage }}</strong> dari <strong>{{ .TotalPages }}</strong>.</p>
+                {{ else if (ne .SearchKey "") and (eq .Results.TotalResults 0) }}
+                    <p>Tidak ada hasil untuk pencarian: <strong>{{ .SearchKey }}</strong>.</p>
+                {{ end }}
+            </div>
+
+            <ul class="search-results">
+                {{ range .Results.Articles }}
+                <li class="news-article">
+                    <div>
+                        <a target="_blank" rel="noreferrer noopener" href="{{ .URL }}">
+                            <h3 class="title">{{ .Title }}</h3>
+                        </a>
+                        <p class="description">{{ .Description }}</p>
+                        <div class="metadata">
+                            <p class="source">{{ .Source.Name }}</p>
+                            <time class="published-date">{{ .FormatPublishedDate }}</time>
+                        </div>
+                    </div>
+                    <img class="article-image" src="{{ .URLToImage }}">
+                </li>
+                {{ end }}
+            </ul>
+
+            <div class="pagination">
+                {{ if (gt .NextPage 1) }}
+                    <a href="/?q={{ .SearchKey }}&page={{ .PreviousPage }}" class="button previous-page">Previous</a>
+                {{ end }}
+
+                {{ if not .IsLastPage }}
+                    <a id="nextPageButton" class="button next-page">Next</a>
+                {{ end }}
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const nextPageButton = document.getElementById('nextPageButton');
+        
+        if (nextPageButton) {
+            nextPageButton.addEventListener('click', function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                let page = parseInt(urlParams.get('page') || '1');
+                page++;  
+                urlParams.set('page', page);
+                window.location.search = urlParams.toString();
+            });
+        }
+    </script>
+</body>
+</html>

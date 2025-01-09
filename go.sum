@@ -1,0 +1,4 @@
+github.com/ishandeveloper/News-App-Go v0.0.0-20200409144910-a39f6343939f h1:t2hCl9AyF4G1OB0FaM/NrKf1g5rsohX1eYXAxmrPQ9c=
+github.com/ishandeveloper/News-App-Go v0.0.0-20200409144910-a39f6343939f/go.mod h1:ZSjY78SrkN+R26fRZum7bP+BtUR5pCQesChUCKbTCYk=
+github.com/joho/godotenv v1.5.1 h1:7eLL/+HRGLY0ldzfGMeQkb7vMd0as4CfYvUVzLqw0N0=
+github.com/joho/godotenv v1.5.1/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
